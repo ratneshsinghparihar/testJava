@@ -11,6 +11,13 @@ Meeting app
  *All JPA enities are immplemented
  **need to setup mysql and change connection string (locally)
  *** immplement following methods in Booking Service
-  List<RoomModel> getAllAvaiableRoomsByLocation(Date startTime,int duration, Long locationId);
-	boolean isRoomAvaiable(BookingParam param);
-	long bookRoom(BookingParam param);
+  
+   ```java
+
+   List<RoomModel> getAllAvaiableRoomsByLocation(Date startTime,int duration, Long locationId);
+	
+   boolean isRoomAvaiable(BookingParam param);
+	
+   long bookRoom(BookingParam param);
+
+   ```
