@@ -1,0 +1,209 @@
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        var localtions;
+        var availableRooms;
+        var selectedRoom;
+
+
+        function changeRoom(room){
+            if(!availableRooms){
+                return ;
+            }
+            availableRooms.forEach((room1)=>{
+                room1.isSeletecd=false;
+        });
+            room.isSeletecd=true;
+            selectedRoom=room;
+        }
+
+$(document).ready(function(){
+//  $("button").click(function(){
+//    $.ajax({url: "http://localhost:8092/booking/1", crossDomain: true, success: function(result){
+//      $("#div1").html(JSON.stringify(result));
+////    }});
+//  });
+    var setRoomId = 0;
+    $("#boom_room_buttom").click(function(){
+        var radioValue = $("input[name='selectedRoom']:checked").val();
+        if(radioValue){
+            console.log(radioValue);
+            setRoomId = radioValue;
+        }
+    });
+
+    $("#boom_room_buttom").click(function () {
+        var roomId = setRoomId;
+        var startTime = new Date($("#date").val()+ " " + $("#time").val()+":00")
+        var duration = $("#duration").val();
+        var userId = $("#userId").val();
+        var bookingTitle = "Test Booking Ui";
+
+        $.ajax('http://localhost:8092/book/bookrooms', {
+            type: 'POST',  // http method
+            dataType: 'json',
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify( {
+                "roomId": roomId,
+                "startTime": startTime,
+                "duration": duration,
+                "userId": userId,
+                "bookingTitle": bookingTitle
+            }),  // data to submit
+            success: function (data, status, xhr) {
+                    console.log(data);
+
+            },
+            error: function (jqXhr, textStatus, errorMessage) {
+                $('p').append('Error' + errorMessage);
+            }
+        })
+
+
+    });
+
+
+
+
+
+
+
+
+  function getLocations(){
+      $.ajax({url: "http://localhost:8092/location/", crossDomain: true, success: function(results){
+          localtions=results._embedded.location.map(x=>x.name);
+          results._embedded.location.forEach((location)=>{
+              $('#locationId').append(`<option value="${location.id}">
+                                       ${location.name}
+                                  </option>`);
+
+          })
+
+      }});
+  }
+    getLocations();
+  $("#userDetail").click(function(){
+      var userId = $("#userId").val();
+        $.ajax({url: "http://localhost:8092/user/"+userId, crossDomain: true, success: function(result){
+            $("#userName").text(result.name);
+        }});
+      $.ajax({url: "http://localhost:8092/user/"+userId+"/organization", crossDomain: true, success: function(result){
+          $("#orgName").text(result.name);
+      }});
+    });
+  $("#bookingDetails").click(function(){
+      var locationId = $("#locationId").val();
+      var bookingDate = $("#date").val();
+      var bookingTime = $("#time").val();
+      var bookingDuratrion = $("#duration").val();
+
+      var mydate=new Date(bookingDate+ " " + bookingTime+":00");
+
+      $("#available_room_table").empty();
+
+      $.ajax('http://localhost:8092/book/availablerooms', {
+          type: 'POST',  // http method
+          dataType: 'json',
+          contentType: "application/json; charset=utf-8",
+          data: JSON.stringify( {
+              "startTime" :mydate,
+              "duration": bookingDuratrion,
+              "locationId": locationId
+          }),  // data to submit
+          success: function (data, status, xhr) {
+              console.log(data);
+              availableRooms=data;
+             data.forEach(
+                 (room)=> {
+                     var roomName = room.name;
+                     var roomId = room.id;
+                     markup = `<tr><td>${roomName}</td>
+                                    <td><input type="radio" onclick="changeRoom(${roomId});" name="selectedRoom" value="${roomId}" ></td>
+                                        </tr>`
+
+                     ;
+              $("#available_room_table").append(markup);
+             }
+             );
+//
+//
+          },
+          error: function (jqXhr, textStatus, errorMessage) {
+              $('p').append('Error' + errorMessage);
+          }
+      });
+
+  })
+});
+
+</script>
+    <title>Meeting Booking App</title>
+
+</head>
+<body>
+<h1>Meeting Booking App</h1>
+    <div class="user">
+    <table>
+        <tr>
+            <td><label for="userId">Enter employee id</label></td>
+            <td><input type="number" placeholder="Employee Id" id="userId"></td>
+        </tr>
+        <tr>
+            <td><button id="userDetail">Get Detail</button></td>
+        </tr>
+        <tr>
+            <td><label id="userName"></label></td>
+            <td><label id="orgName"></label></td>
+        </tr>
+    </table>
+</div>
+<div class="getDetails">
+    <table>
+        <tr>
+            <td><label for="locationId">Select Location</label></td>
+            <td>
+                <select id="locationId" >
+
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td><label for="date">Select Date</label></td>
+            <td><input type="date" id="date"></td>
+        </tr>
+        <tr>
+            <td><label for="time">Select Time</label> </td>
+            <td><input type = "time" id="time" min="00:00" max="12:00"></td>
+        </tr>
+        <tr>
+            <td><label for="duration">Duration(mins)</label> </td>
+            <td><input type = "number" id="duration"></td>
+        </tr>
+        <tr>
+            <td><button id="bookingDetails">Get Detail</button></td>
+        </tr>
+    </table>
+
+</div>
+<div class="availableRoomTable">
+    <table>
+        <thead>
+            <td>Name</td>
+            <td>Select Room</td>
+        </thead>
+        <tbody id="available_room_table">
+
+        </tbody>
+    </table>
+    <button id="boom_room_buttom" >Book</button>
+</div>
+
+
+
+<div id="div1"><h2>Let jQuery AJAX Change This Text</h2></div>
+
+<button>Get External Content</button>
+
+</body>
+</html>

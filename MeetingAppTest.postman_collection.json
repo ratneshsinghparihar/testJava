@@ -1,0 +1,232 @@
+{
+	"info": {
+		"_postman_id": "d83cb181-632a-40ec-94ce-6d67352c58bc",
+		"name": "MeetingAppTest",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "http://localhost:8092/book/availablerooms?startTime=28/08/2020 07:00:00 PM&duration=60&locationId=2",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"startTime\" :\"28/08/2020 07:00:00\",\n    \"duration\": 60,\n    \"locationId\": 1\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8092/book/availablerooms?startTime=28/08/2020 07:00:00 PM&duration=60&locationId=2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8092",
+					"path": [
+						"book",
+						"availablerooms"
+					],
+					"query": [
+						{
+							"key": "startTime",
+							"value": "28/08/2020 07:00:00 PM"
+						},
+						{
+							"key": "duration",
+							"value": "60"
+						},
+						{
+							"key": "locationId",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "http://localhost:8092/book/availablerooms?startTime=28/08/2020 07:00:00 PM&duration=60&locationId=2",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"startTime\" :\"28/08/2020 07:00:00\",\n    \"duration\": 60,\n    \"locationId\": 1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8092/book/availablerooms?startTime=28/08/2020 07:00:00 PM&duration=60&locationId=2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8092",
+							"path": [
+								"book",
+								"availablerooms"
+							],
+							"query": [
+								{
+									"key": "startTime",
+									"value": "28/08/2020 07:00:00 PM"
+								},
+								{
+									"key": "duration",
+									"value": "60"
+								},
+								{
+									"key": "locationId",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Vary",
+							"value": "Origin"
+						},
+						{
+							"key": "Vary",
+							"value": "Access-Control-Request-Method"
+						},
+						{
+							"key": "Vary",
+							"value": "Access-Control-Request-Headers"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 28 Aug 2020 15:06:40 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"id\": 3,\n        \"name\": \"Room3\",\n        \"description\": null,\n        \"createdDate\": \"2020-08-26T14:52:49.145+00:00\",\n        \"modifedDate\": \"2020-08-26T14:52:49.145+00:00\",\n        \"createdBy\": \"test\",\n        \"modifiedBy\": \"test\",\n        \"location\": null,\n        \"bookingRooms\": []\n    },\n    {\n        \"id\": 4,\n        \"name\": \"Room4\",\n        \"description\": null,\n        \"createdDate\": \"2020-08-26T14:52:49.145+00:00\",\n        \"modifedDate\": \"2020-08-26T14:52:49.145+00:00\",\n        \"createdBy\": \"test\",\n        \"modifiedBy\": \"test\",\n        \"location\": null,\n        \"bookingRooms\": []\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "http://localhost:8092/book/bookrooms",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"roomId\" : 1,\n    \"startTime\" :\"2020-08-28T15:03:20.634+00:00\",\n    \"duration\": 60,\n    \"userId\": 1,\n    \"bookingTitle\":\"post testing\" \n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8092/book/bookrooms",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8092",
+					"path": [
+						"book",
+						"bookrooms"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "http://localhost:8092/book/bookrooms",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"roomId\" : 1,\n    \"startTime\" :\"2020-08-28T15:03:20.634+00:00\",\n    \"duration\": 60,\n    \"userId\": 1,\n    \"bookingTitle\":\"post testing\" \n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8092/book/bookrooms",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8092",
+							"path": [
+								"book",
+								"bookrooms"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Vary",
+							"value": "Origin"
+						},
+						{
+							"key": "Vary",
+							"value": "Access-Control-Request-Method"
+						},
+						{
+							"key": "Vary",
+							"value": "Access-Control-Request-Headers"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 28 Aug 2020 15:04:19 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "0"
+				}
+			]
+		}
+	],
+	"protocolProfileBehavior": {}
+}
